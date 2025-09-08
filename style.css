@@ -1,0 +1,486 @@
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(-45deg, #ff6b6b, #ffa500, #ff1744, #e91e63, #9c27b0);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport height for mobile */
+            touch-action: manipulation; /* Prevent zoom on double tap */
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        /* scroll */
+        html, body {
+            overscroll-behavior: none;
+            overflow-x: hidden;
+        }
+        
+        .section {
+            min-height: 100vh;
+            min-height: 100dvh; /* Better mobile viewport */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        /* ===== Photo Section ===== */
+        .photo-section {
+        background: linear-gradient(135deg, #fceabb, #f8b500);
+        color: #333;
+        }
+        
+
+        .photo-section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        font-family: "Comic Sans MS", cursive, sans-serif;
+        }
+
+        .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        width: 100%;
+        max-width: 400px;
+        }
+
+        .photo-grid img {
+        width: 100%;
+        border-radius: 12px;
+        object-fit: cover;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transform: rotate(-2deg);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: white;
+        padding: 4px;
+        }
+
+        .photo-grid img:nth-child(even) {
+        transform: rotate(2deg);
+        }
+
+        .photo-grid img:hover {
+        transform: scale(1.05) rotate(0deg);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        /* ===== Love Section ===== */
+        .love-section {
+        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+        color: #fff;
+        }
+
+        .love-section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-family: "Brush Script MT", cursive;
+        }
+
+        .love-message {
+        max-width: 360px;
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 0 auto;
+        background: rgba(255,255,255,0.15);
+        padding: 1rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* ===== Tombol Umum ===== */
+        .btn {
+        margin-top: 1.5rem;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 25px;
+        background: #fff;
+        color: #333;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .btn:hover {
+        background: #eee;
+        transform: scale(1.05);
+        }
+        
+        .welcome-section {
+            position: relative;
+        }
+        
+        .welcome-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            transform: scale(0);
+            animation: scaleIn 1s ease-out 0.5s forwards;
+        }
+        
+        @keyframes scaleIn {
+            to {
+                transform: scale(1);
+            }
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff6b6b;
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff6b6b;
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .name-input {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .input-field {
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .input-field:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa500);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+        }
+        
+        .message-section {
+            display: none;
+        }
+        
+        .message-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .birthday-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .message-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .photo {
+            width: 100%;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: visible;
+        }
+        
+        .photo:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .wishes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .wish-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            font-weight: 500;
+            animation: wishFloat 3s infinite ease-in-out;
+        }
+        
+        .wish-item:nth-child(odd) {
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes wishFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .next-btn {
+            margin-top: 2rem;
+        }
+        
+        .surprise-section {
+            display: none;
+        }
+        
+        .cake {
+            font-size: 8rem;
+            margin: 1rem 0;
+        }
+        
+        
+        .final-message {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.95);
+            margin: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.1rem;
+                margin-bottom: 1.5rem;
+                display: flex;
+            }
+            
+            .birthday-title {
+                font-size: 1.6rem;
+                text-align: center;
+                color: pink;
+    
+            }
+            
+            .message-content, .welcome-content {
+                padding: 2rem 1.5rem;
+                margin: 0.5rem;
+                border-radius: 20px;
+            }
+            
+            .cake {
+                font-size: 6rem;
+                margin: 1.5rem 0;
+            }
+            
+            .input-field, .btn {
+                font-size: 1rem;
+                padding: 18px 20px; /* Larger touch targets for iOS */
+            }
+            
+            .message-text {
+                font-size: 1.1rem;
+                line-height: 1.7;
+            }
+            
+            .final-message {
+                font-size: 1.2rem;
+                line-height: 1.7;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 2rem;
+            }
+            
+            /* iPhone 12 specific optimizations */
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .photo {
+                height: 120px;
+                font-size: 2.5rem;
+            }
+            
+            .wishes {
+                gap: 0.8rem;
+            }
+            
+            .wish-item {
+                padding: 12px 18px;
+                font-size: 0.95rem;
+            }
+            
+            /* Prevent text selection issues on iOS */
+            .title, .birthday-title {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+        }
+        
+        .sparkle {
+            position: absolute;
+            font-size: 20px;
+            color: #fff;
+            animation: sparkle 5s infinite;
+            z-index: 9999;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+    

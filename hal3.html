@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Scrapbook - Happy Birthday My Love 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%, 90% { opacity: 1; }
+            50% { transform: translateY(-10vh) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2em;
+        }
+
+        .upload-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .scrapbook {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .photo-frame {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+            animation: photoAppear 0.8s ease-out forwards;
+        }
+
+        .photo-frame:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 10;
+        }
+
+        @keyframes photoAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(180deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(-10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(-2deg);
+            }
+        }
+
+        .photo-frame:nth-child(even) {
+            animation: photoAppearEven 0.8s ease-out forwards;
+        }
+
+        @keyframes photoAppearEven {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotate(-180deg);
+            }
+            50% {
+                transform: scale(1.1) rotate(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(2deg);
+            }
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .photo-caption {
+            text-align: center;
+        }
+
+        .photo-caption input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+            text-align: center;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease;
+        }
+
+        .photo-caption input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #ff3742;
+            transform: scale(1.1);
+        }
+
+        .love-quotes {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideInUp 1s ease-out 0.6s both;
+        }
+
+        .love-quotes h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .quote {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3em;
+            font-style: italic;
+            margin: 15px 0;
+            opacity: 0;
+            animation: fadeInText 2s ease-out forwards;
+        }
+
+        .quote:nth-child(2) { animation-delay: 1s; }
+        .quote:nth-child(3) { animation-delay: 2s; }
+        .quote:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 1.5em;
+            animation: sparkle 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .scrapbook {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>💕 Happy Birthday My Love 💕</h1>
+            <p>Scrapbook digital spesial untuk orang terspesial di hidupku</p>
+        </div>
+
+        <div class="upload-section">
+            <h2 style="color: white; margin-bottom: 20px;">Tambahkan Foto Kenangan Kita</h2>
+            <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+                📸 Upload Foto
+            </button>
+            <input type="file" id="fileInput" accept="image/*" multiple>
+        </div>
+
+        <div class="scrapbook" id="scrapbook"></div>
+
+        <div class="love-quotes">
+            <h2>💖 Kata-kata Cinta 💖</h2>
+            <div class="quote">"Setiap detik bersamamu adalah hadiah terbaik dalam hidupku"</div>
+            <div class="quote">"Kamu adalah alasan mengapa aku percaya pada keajaiban"</div>
+            <div class="quote">"Happy birthday to the most amazing person in my world"</div>
+        </div>
+    </div>
+
+    <script>
+        // Animasi hati yang jatuh
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.querySelector('.hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 1000);
+
+        // Upload foto dengan animasi
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const scrapbook = document.getElementById('scrapbook');
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    // Delay untuk animasi yang lebih smooth
+                    setTimeout(() => {
+                        createPhotoFrame(event.target.result);
+                        createSparkles();
+                    }, i * 500);
+                };
+
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function createPhotoFrame(imageSrc) {
+            const scrapbook = document.getElementById('scrapbook');
+            const frame = document.createElement('div');
+            frame.className = 'photo-frame';
+            frame.style.position = 'relative';
+
+            frame.innerHTML = `
+                <button class="delete-btn" onclick="deletePhoto(this)">×</button>
+                <img src="${imageSrc}" alt="Kenangan Kita">
+                <div class="photo-caption">
+                    <input type="text" placeholder="Tulis caption untuk foto ini..." 
+                           onchange="saveCaption(this)">
+                </div>
+            `;
+
+            scrapbook.appendChild(frame);
+
+            // Animasi masuk
+            setTimeout(() => {
+                frame.style.animationDelay = '0s';
+            }, 100);
+        }
+
+        function deletePhoto(btn) {
+            const frame = btn.parentElement;
+            frame.style.animation = 'photoDisappear 0.5s ease-out forwards';
+            
+            setTimeout(() => {
+                frame.remove();
+            }, 500);
+        }
+
+        function saveCaption(input) {
+            // Simpan caption (bisa ditambahkan ke localStorage jika diperlukan)
+            console.log('Caption saved:', input.value);
+        }
+
+        function createSparkles() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.left = Math.random() * 100 + 'vw';
+                    sparkle.style.top = Math.random() * 100 + 'vh';
+                    document.body.appendChild(sparkle);
+
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+
+        // Tambahkan CSS untuk animasi keluar
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes photoDisappear {
+                0% { opacity: 1; transform: scale(1) rotate(-2deg); }
+                100% { opacity: 0; transform: scale(0) rotate(180deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Efek klik untuk elemen interaktif
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('upload-btn') || 
+                e.target.classList.contains('delete-btn')) {
+                createSparkles();
+            }
+        });
+
+        // Pesan selamat datang
+        setTimeout(() => {
+            console.log('💕 Selamat datang di scrapbook digital spesial! 💕');
+        }, 2000);
+    </script>
+</body>
+</html>
