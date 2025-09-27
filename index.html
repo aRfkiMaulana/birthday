@@ -120,86 +120,9 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .game-container {
-            max-width: 300px;
-            margin: 0 auto;
-        }
 
-        .game-board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 5px;
-            background: rgba(255,255,255,0.2);
-            padding: 10px;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-        }
-
-        .game-cell {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.8);
-            border: none;
-            border-radius: 10px;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .game-cell:hover {
-            background: rgba(255,255,255,0.9);
-            transform: scale(1.05);
-        }
-
-        .game-cell:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        .game-status {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .game-reset {
-            background: rgba(255,255,255,0.9);
-            color: #e91e63;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .game-reset:hover {
-            background: white;
-            transform: scale(1.05);
-        }
 
         /* ===== Tombol Umum ===== */
-        .btn {
-            margin-top: 1.5rem;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            background: #fff;
-            color: #333;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: transform 0.2s ease, background 0.2s ease;
-            font-size: 1rem;
-        }
-
-        .btn:hover {
-            background: #eee;
-            transform: scale(1.05);
-        }
         
         .welcome-section {
             position: relative;
@@ -291,6 +214,7 @@
             transition: all 0.3s ease;
             box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
             font-family: 'Poppins', sans-serif;
+            
         }
         
         .btn:hover {
@@ -471,16 +395,6 @@
                 padding: 0.8rem;
                 max-width: 300px;
             }
-
-            .game-cell {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-
-            .game-status {
-                font-size: 1.1rem;
-            }
         }
         
         .sparkle {
@@ -620,7 +534,8 @@
             margin: 0 auto;
             padding: 20px;
             position: relative;
-            z-index: 2;
+            z-index: 1;
+            justify-content: center;
         }
         .hal3-header {
             text-align: center;
@@ -801,6 +716,60 @@
             0% { opacity: 1; transform: scale(1) rotate(-2deg);}
             100% { opacity: 0; transform: scale(0) rotate(180deg);}
         }
+
+        .big-gift-icon {
+            font-size: 10vw;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.2s;
+        }
+        @media (max-width: 600px) {
+            .big-gift-icon {
+                font-size: 25vw;
+            }
+        }
+        .btn:active .big-gift-icon {
+            transform: scale(1.1) rotate(-10deg);
+        }
+
+        /* tetris */
+        .tetris-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            }
+
+            canvas#tetris {
+            background: #111;
+            border: 3px solid #ff69b4;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            }
+
+            .game-controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 10px;
+            }
+
+            .game-controls button {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            }
+
+            .game-controls button:active {
+            background: #d63c8a;
+            }
     </style>
 </head>
 <audio id="bgMusic" loop>
@@ -809,15 +778,15 @@
 <body>
     <div class="hearts" id="hearts"></div>
         <div class="container">
-        <section class="section welcome-section" id="welcomeSection">
-            <div class="welcome-content">
-            <h1 class="title">💕Special Surprise💕</h1>
-            <p class="subtitle">I have something for you...</p>
-            <div class="name-input">
-                <button class="btn" onclick="openPinModal()">Mulai Kejutan! ✨</button>
-            </div>
-            </div>
-        </section>
+            <section class="section welcome-section" id="welcomeSection">
+                <div class="welcome-content" style="background: none; box-shadow: none; padding: 0;">
+                    <button 
+                        class="btn" 
+                        onclick="openPinModal()" 
+                        style="background: none; box-shadow: none; border: none; padding: 0; cursor: pointer;">
+                        <span class="big-gift-icon">🎁</span>
+                    </button>
+                </div>
         </div>
 
         <!-- Modal PIN -->
@@ -856,7 +825,7 @@
                     </div>
                     <div class="hal3-upload-section">
                         <h2 style="color: white; margin-bottom: 20px;">Tambahkan Foto Kenangan Kita</h2>
-                        <button class="hal3-upload-btn" onclick="document.getElementById('hal3FileInput').click()">
+                        <button class="btn" onclick="document.getElementById('hal3FileInput').click()">
                             📸 Upload Foto
                         </button>
                         <input type="file" id="hal3FileInput" accept="image/*" multiple>
@@ -867,9 +836,9 @@
                         <div class="hal3-quote">"Setiap detik bersamamu adalah hadiah terbaik dalam hidupku"</div>
                         <div class="hal3-quote">"Kamu adalah alasan mengapa aku percaya pada keajaiban"</div>
                         <div class="hal3-quote">"Happy birthday to the most amazing person in my world"</div>
+                        <button class="btn" onclick="showLoveGame()">Tetris! 💕</button>
                     </div>
                 </div>
-                <button class="btn" onclick="showLoveGame()">TicTacToe! 💕</button>
             </div>
         </section>
 
@@ -887,25 +856,19 @@
             <div class="message-content">
                 <h2>💕 Love Game 💕</h2>
                 <div class="love-message">
-                    Ayo main TicTacToe! Kamu jadi ❤️ dan aku jadi 💙
+                Ayo main Tetris bareng! 🎮
                 </div>
-                
-                <div class="game-container">
-                    <div class="game-status" id="gameStatus">Giliran kamu! ❤️</div>
-                    <div class="game-board" id="gameBoard">
-                        <button class="game-cell" onclick="makeMove(0)"></button>
-                        <button class="game-cell" onclick="makeMove(1)"></button>
-                        <button class="game-cell" onclick="makeMove(2)"></button>
-                        <button class="game-cell" onclick="makeMove(3)"></button>
-                        <button class="game-cell" onclick="makeMove(4)"></button>
-                        <button class="game-cell" onclick="makeMove(5)"></button>
-                        <button class="game-cell" onclick="makeMove(6)"></button>
-                        <button class="game-cell" onclick="makeMove(7)"></button>
-                        <button class="game-cell" onclick="makeMove(8)"></button>
-                    </div>
-                    <button class="game-reset" onclick="resetGame()">Main Lagi 🔄</button>
+
+                <div class="tetris-container">
+                <canvas id="tetris" width="240" height="400"></canvas>
+                <div class="game-controls">
+                    <button onclick="moveLeft()">⬅️</button>
+                    <button onclick="rotatePiece()">🔄</button>
+                    <button onclick="moveRight()">➡️</button>
+                    <button onclick="dropPiece()">⬇️</button>
                 </div>
-                
+                </div>
+
                 <button class="btn" onclick="showFinalSurprise()">Kejutan Terakhir! 🎁</button>
             </div>
         </section>
@@ -934,6 +897,13 @@
     </div>
 
     <script>
+        function showLoveGame() {
+    // Sembunyikan scrapbook section
+    document.getElementById('hal3Section').style.display = 'none';
+    // Tampilkan love-section (Tetris)
+    document.getElementById('loveSection').style.display = 'flex';
+    document.getElementById('loveSection').scrollIntoView({ behavior: 'smooth' });
+}
         const correctPin = "100824";
 
         function openPinModal() {
@@ -995,10 +965,7 @@
             modal.classList.add("shake");
             setTimeout(() => modal.classList.remove("shake"), 500);
         }
-        // Game variables
-        let gameBoard = ['', '', '', '', '', '', '', '', ''];
-        let currentPlayer = '❤️'; // Player starts
-        let gameActive = true;
+        
         
         // tesk ketik 
         function typeText() {
@@ -1148,95 +1115,155 @@
             // Scroll ke scrapbook section (opsional)
             document.getElementById('hal3Section').scrollIntoView({ behavior: 'smooth' });
         }
+
+        // TETRIS GAME
+        const canvas = document.getElementById("tetris");
+        const context = canvas.getContext("2d");
+        context.scale(20, 20);
+
+        const matrix = [
+        [0,0,0],
+        [1,1,1],
+        [0,1,0],
+        ];
+
+        function createMatrix(w, h) {
+        const matrix = [];
+        while (h--) {
+            matrix.push(new Array(w).fill(0));
+        }
+        return matrix;
+        }
+
+        function drawMatrix(matrix, offset) {
+        matrix.forEach((row, y) => {
+            row.forEach((value, x) => {
+            if (value !== 0) {
+                context.fillStyle = "pink";
+                context.fillRect(x + offset.x, y + offset.y, 1, 1);
+            }
+            });
+        });
+        }
+
+        function merge(arena, player) {
+        player.matrix.forEach((row, y) => {
+            row.forEach((value, x) => {
+            if (value !== 0) {
+                arena[y + player.pos.y][x + player.pos.x] = value;
+            }
+            });
+        });
+        }
+
+        function collide(arena, player) {
+        const m = player.matrix;
+        const o = player.pos;
+        for (let y = 0; y < m.length; ++y) {
+            for (let x = 0; x < m[y].length; ++x) {
+            if (
+                m[y][x] !== 0 &&
+                (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0
+            ) {
+                return true;
+            }
+            }
+        }
+        return false;
+        }
+
+        function playerDrop() {
+        player.pos.y++;
+        if (collide(arena, player)) {
+            player.pos.y--;
+            merge(arena, player);
+            playerReset();
+        }
+        dropCounter = 0;
+        }
+
+        function playerMove(dir) {
+        player.pos.x += dir;
+        if (collide(arena, player)) {
+            player.pos.x -= dir;
+        }
+        }
+
+        function playerReset() {
+        player.matrix = matrix;
+        player.pos.y = 0;
+        player.pos.x = ((arena[0].length / 2) | 0) - 
+                        ((player.matrix[0].length / 2) | 0);
+        }
+
+        function playerRotate() {
+        const m = player.matrix;
+        for (let y = 0; y < m.length; ++y) {
+            for (let x = 0; x < y; ++x) {
+            [m[x][y], m[y][x]] = [m[y][x], m[x][y]];
+            }
+        }
+        m.forEach(row => row.reverse());
+        if (collide(arena, player)) {
+            playerRotate(); // coba lagi kalau mentok
+        }
+        }
+
+        let dropCounter = 0;
+        let dropInterval = 1000;
+        let lastTime = 0;
+
+        function update(time = 0) {
+        const deltaTime = time - lastTime;
+        lastTime = time;
+
+        dropCounter += deltaTime;
+        if (dropCounter > dropInterval) {
+            playerDrop();
+        }
+
+        draw();
+        requestAnimationFrame(update);
+        }
+
+        function draw() {
+        context.fillStyle = "#111";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        drawMatrix(arena, {x:0,y:0});
+        drawMatrix(player.matrix, player.pos);
+        }
+
+        const arena = createMatrix(12, 20);
+        const player = {
+        pos: {x: 5, y: 0},
+        matrix: matrix,
+        };
+
+        document.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft") {
+            playerMove(-1);
+        } else if (event.key === "ArrowRight") {
+            playerMove(1);
+        } else if (event.key === "ArrowDown") {
+            playerDrop();
+        } else if (event.key === "ArrowUp") {
+            playerRotate();
+        }
+        });
+
+        // kontrol untuk mobile
+        function moveLeft() { playerMove(-1); }
+        function moveRight() { playerMove(1); }
+        function dropPiece() { playerDrop(); }
+        function rotatePiece() { playerRotate(); }
+
+        playerReset();
+        update();
+
         
 
 
-        function showLoveGame() {
-            if (window.navigator.vibrate) {
-                window.navigator.vibrate([100, 50, 100]);
-            }
-            
-            const photoSection = document.getElementById('photoSection');
-            const loveSection = document.getElementById('loveSection');
-            
-            photoSection.style.opacity = '0';
-            photoSection.style.transform = 'translateY(-50px)';
-            
-            setTimeout(() => {
-                photoSection.style.display = 'none';
-                loveSection.style.display = 'flex';
-                loveSection.scrollIntoView({ behavior: 'smooth' });
-                createSparkles(loveSection);
-                resetGame();
-            }, 300);
-        }
 
-        function makeMove(cellIndex) {
-            if (gameBoard[cellIndex] !== '' || !gameActive) {
-                return;
-            }
-
-            gameBoard[cellIndex] = currentPlayer;
-            document.querySelectorAll('.game-cell')[cellIndex].innerHTML = currentPlayer;
-            
-            if (window.navigator.vibrate) {
-                window.navigator.vibrate(50);
-            }
-
-            if (checkWinner()) {
-                document.getElementById('gameStatus').innerHTML = 
-                    currentPlayer === '❤️' ? 'Kamu menang! 🎉' : 'Aku menang! 😁';
-                gameActive = false;
-                return;
-            }
-
-            if (gameBoard.every(cell => cell !== '')) {
-                document.getElementById('gameStatus').innerHTML = 'Seri!💕';
-                gameActive = false;
-                return;
-            }
-
-            currentPlayer = currentPlayer === '❤️' ? '💙' : '❤️';
-            document.getElementById('gameStatus').innerHTML = 
-                currentPlayer === '❤️' ? 'Giliran kamu! ❤️' : 'Giliran aku! 💙';
-
-            // Simple AI for computer player
-            if (currentPlayer === '💙' && gameActive) {
-                setTimeout(() => {
-                    computerMove();
-                }, 500);
-            }
-        }
-
-        function computerMove() {
-            const emptyCells = gameBoard.map((cell, index) => cell === '' ? index : null).filter(val => val !== null);
-            if (emptyCells.length > 0) {
-                const randomIndex = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-                makeMove(randomIndex);
-            }
-        }
-
-        function checkWinner() {
-            const winPatterns = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-                [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-                [0, 4, 8], [2, 4, 6] // diagonals
-            ];
-
-            return winPatterns.some(pattern => {
-                return pattern.every(index => gameBoard[index] === currentPlayer);
-            });
-        }
-
-        function resetGame() {
-            gameBoard = ['', '', '', '', '', '', '', '', ''];
-            currentPlayer = '❤️';
-            gameActive = true;
-            document.getElementById('gameStatus').innerHTML = 'Giliran kamu! ❤️';
-            document.querySelectorAll('.game-cell').forEach(cell => {
-                cell.innerHTML = '';
-            });
-        }
 
         function showFinalSurprise() {
             if (window.navigator.vibrate) {
