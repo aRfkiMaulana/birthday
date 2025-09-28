@@ -600,7 +600,7 @@
             margin-top: 40px;
         }
         .hal3-photo-frame {
-            background: white;
+            background: #ff6b6b;
             border-radius: 15px;
             padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -859,22 +859,18 @@
                 <div class="hal3-hearts"></div>
                     <div class="hal3-container">
                         <div class="hal3-header">
-                            <h1>💕 Happy Birthday My Love 💕</h1>
+                            <h1>📕Scrapbook</h1>
                             <p>Scrapbook digital spesial untuk orang terspesial di hidupku</p>
                         </div>
                         <div class="hal3-upload-section">
                             <h2 style="color: white; margin-bottom: 20px;">Tambahkan Foto Kenangan Kita</h2>
                             <button class="btn" onclick="document.getElementById('hal3FileInput').click()">
-                                📸 Upload Foto
+                                📸 Upload Photos
                             </button>
                             <input type="file" id="hal3FileInput" accept="image/*" multiple>
                         </div>
                         <div class="hal3-scrapbook" id="hal3Scrapbook"></div>
-                        <div class="hal3-love-quotes">
-                            <h2>💖 Kata-kata Cinta 💖</h2>
-                            <div class="hal3-quote">"Setiap detik bersamamu adalah hadiah terbaik dalam hidupku"</div>
-                            <div class="hal3-quote">"Kamu adalah alasan mengapa aku percaya pada keajaiban"</div>
-                            <div class="hal3-quote">"Happy birthday to the most amazing person in my world"</div>
+                        <div class="hal3-love-quotes" style="background: none; box-shadow: none; padding: 0; border: none;">
                             <button class="btn" onclick="showLoveGame()">Tetris! 💕</button>
                         </div>
                     </div>
@@ -1058,18 +1054,6 @@
             }
             // Scrapbook Digital (hal3) - script unik agar tidak bentrok
             (function() {
-                // Animasi hati
-                function hal3CreateHeart() {
-                    const heart = document.createElement('div');
-                    heart.className = 'hal3-heart';
-                    heart.innerHTML = '💖';
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                    heart.style.animationDelay = Math.random() * 2 + 's';
-                    document.querySelector('.hal3-hearts').appendChild(heart);
-                    setTimeout(() => { heart.remove(); }, 6000);
-                }
-                setInterval(hal3CreateHeart, 1000);
 
                 // Upload foto
                 document.getElementById('hal3FileInput').addEventListener('change', function(e) {
