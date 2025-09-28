@@ -834,12 +834,35 @@
             <div class="pin-modal-content">
                 <h2>Anniversary🔒</h2>
                 <div class="pin-container">
-                <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin2')" id="pin1">
-                <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin3')" id="pin2">
-                <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin4')" id="pin3">
-                <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin5')" id="pin4">
-                <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin6')" id="pin5">
-                <input type="password" inputmode="numeric" pattern="[0-9]*" maxlength="1" class="pin-box" oninput="checkAutoSubmit()" id="pin6">
+                <input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+       oninput="moveNext(this, 'pin2')" 
+       onkeydown="movePrev(event, null)" 
+       id="pin1">
+
+<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+       oninput="moveNext(this, 'pin3')" 
+       onkeydown="movePrev(event, 'pin1')" 
+       id="pin2">
+
+<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+       oninput="moveNext(this, 'pin4')" 
+       onkeydown="movePrev(event, 'pin2')" 
+       id="pin3">
+
+<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+       oninput="moveNext(this, 'pin5')" 
+       onkeydown="movePrev(event, 'pin3')" 
+       id="pin4">
+
+<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+       oninput="moveNext(this, 'pin6')" 
+       onkeydown="movePrev(event, 'pin4')" 
+       id="pin5">
+
+<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+       oninput="checkAutoSubmit()" 
+       onkeydown="movePrev(event, 'pin5')" 
+       id="pin6">
                 </div>
                 <p id="errorMessage" style="color:red; display:none;">❌ Memang!kamu nda sayang sama aku</p>
             </div>
@@ -927,6 +950,8 @@
         </div>
 
         <script>
+
+            // PIN
             const correctPin = "123456";
 
             function openPinModal() {
@@ -972,16 +997,20 @@
             }
 
             function resetPin() {
-                for (let i = 1; i <= 6; i++) {
-                    document.getElementById("pin" + i).value = "";
+                for (let i = 1; i <= 6; i++) { document.getElementById("pin" + i).value = ""; 
                 }
-                // Fokus ke input terakhir
-                document.getElementById("pin6").focus();
+                document.getElementById("pin1").focus(); 
             }
 
+            function movePrev(e, prevId) {
+                if (e.key === "Backspace" && e.target.value === "" && prevId) {
+                    document.getElementById(prevId).focus();
+                }
+            }
+
+            // start surprise
             function startSurprise() {
                 alert("🎉 Selamat datang di kejutan spesial! 💖");
-                // bisa diarahkan ke halaman / animasi
             }
 
             function shakeModal() {
@@ -1334,7 +1363,7 @@
             }
 
             let dropCounter = 0;
-            let dropInterval = 500;
+            let dropInterval = 400;
             let lastTime = 0;
 
             function update(time = 0) {
