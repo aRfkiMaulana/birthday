@@ -770,6 +770,39 @@
         .game-controls button:active {
         background: #d63c8a;
         }
+
+        /* pop up tetris */
+        .tetris-modal {
+        display: none; /* default sembunyi */
+        position: fixed;
+        z-index: 1000;
+        left: 0; top: 0;
+        width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6);
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        }
+
+        .tetris-modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        max-width: 300px;
+        width: 80%;
+        }
+
+        .tetris-modal-content button {
+        background: #ff69b4;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        }
+
     </style>
 </head>
 <audio id="bgMusic" loop>
@@ -867,10 +900,15 @@
                         <button onclick="rotatePiece()">🔄</button>
                         <button onclick="dropPiece()">⬇️</button>
                     </div>
-                    <div id="gameStatus" style="margin-top:10px; font-weight:bold; color:#ff69b4;"></div>
+                     <div id="gameOverModal" class="tetris-modal">
+                        <div class="tetris-modal-content">
+                            <h3>Game Over 😢</h3>
+                            <p>Mau coba main lagi?</p>
+                            <button onclick="restartGame()">Main Lagi 🔄</button>
+                        </div>
                     </div>
 
-                    <button class="btn" onclick="showFinalSurprise()">Kejutan Terakhir! 🎁</button>
+                    <button class="btn" style="margin-top: 10px;" onclick="showFinalSurprise()">Kejutan Terakhir! 🎁</button>
                 </div>
             </section>
             
@@ -1257,22 +1295,29 @@
             }
 
             function playerReset() {
-            const pieces = "TJLOSZI";
-            player.matrix = createPiece(
-                pieces[(pieces.length * Math.random()) | 0]
-            );
-            player.pos.y = 0;
-            player.pos.x =
-                ((arena[0].length / 2) | 0) -
-                ((player.matrix[0].length / 2) | 0);
+                const pieces = "TJLOSZI";
+                player.matrix = createPiece(
+                    pieces[(pieces.length * Math.random()) | 0]
+                );
+                player.pos.y = 0;
+                player.pos.x =
+                    ((arena[0].length / 2) | 0) -
+                    ((player.matrix[0].length / 2) | 0);
 
-            // cek game over
-            if (collide(arena, player)) {
-                document.getElementById("gameStatus").innerText = "Game Over 😢";
-                arena.forEach(row => row.fill(0));
-            } else {
-                document.getElementById("gameStatus").innerText = "";
+                // cek game over
+                if (collide(arena, player)) {
+                    showGameOver(); // munculkan modal
+                    arena.forEach(row => row.fill(0)); // reset arena
+                }
             }
+
+            function showGameOver() {
+                document.getElementById("gameOverModal").style.display = "flex";
+            }
+
+            function restartGame() {
+                document.getElementById("gameOverModal").style.display = "none";
+                playerReset();
             }
 
             function playerRotate() {
