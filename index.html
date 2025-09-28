@@ -801,6 +801,13 @@
         font-size: 16px;
         cursor: pointer;
         }
+        /* akhir */
+
+        #welcomeSection .welcome-content {
+            border: none !important;
+            box-shadow: none !important;
+            background: none !important;
+        }
 
     </style>
 </head>
@@ -892,7 +899,7 @@
                     </div>
 
                     <div class="tetris-container">
-                    <canvas id="tetris" width="300" height="400"></canvas>
+                    <canvas id="tetris" width="350" height="400"></canvas>
                     <div class="game-controls">
                         <button onclick="moveLeft()">⬅️</button>
                         <button onclick="moveRight()">➡️</button>
@@ -1367,7 +1374,7 @@
             requestAnimationFrame(update);
             }
 
-            const arena = createMatrix(15, 20);
+            const arena = createMatrix(17, 20);
             const player = {
             pos: { x: 0, y: 0 },
             matrix: null,
