@@ -838,31 +838,30 @@
        oninput="moveNext(this, 'pin2')" 
        onkeydown="movePrev(event, null)" 
        id="pin1">
+        <input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+            oninput="moveNext(this, 'pin3')" 
+            onkeydown="movePrev(event, 'pin1')" 
+            id="pin2">
 
-<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
-       oninput="moveNext(this, 'pin3')" 
-       onkeydown="movePrev(event, 'pin1')" 
-       id="pin2">
+        <input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+            oninput="moveNext(this, 'pin4')" 
+            onkeydown="movePrev(event, 'pin2')" 
+            id="pin3">
 
-<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
-       oninput="moveNext(this, 'pin4')" 
-       onkeydown="movePrev(event, 'pin2')" 
-       id="pin3">
+        <input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+            oninput="moveNext(this, 'pin5')" 
+            onkeydown="movePrev(event, 'pin3')" 
+            id="pin4">
 
-<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
-       oninput="moveNext(this, 'pin5')" 
-       onkeydown="movePrev(event, 'pin3')" 
-       id="pin4">
+        <input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+            oninput="moveNext(this, 'pin6')" 
+            onkeydown="movePrev(event, 'pin4')" 
+            id="pin5">
 
-<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
-       oninput="moveNext(this, 'pin6')" 
-       onkeydown="movePrev(event, 'pin4')" 
-       id="pin5">
-
-<input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
-       oninput="checkAutoSubmit()" 
-       onkeydown="movePrev(event, 'pin5')" 
-       id="pin6">
+        <input type="password" inputmode="numeric" maxlength="1" class="pin-box" 
+            oninput="checkAutoSubmit()" 
+            onkeydown="movePrev(event, 'pin5')" 
+            id="pin6">
                 </div>
                 <p id="errorMessage" style="color:red; display:none;">❌ Memang!kamu nda sayang sama aku</p>
             </div>
@@ -883,7 +882,7 @@
                 <div class="hal3-hearts"></div>
                     <div class="hal3-container">
                         <div class="hal3-upload-section">
-                            <h1 style="color:white; margin-bottom: 10px;">📷</h1>
+                            <h1 style="color:white; margin-bottom: 10px; font-size: 4rem;">📷</h1>
                             <h2 style="color: white; margin-bottom: 20px;"> We Keep This Love In a Photograph</h2>
                             <button class="btn" onclick="document.getElementById('hal3FileInput').click()">
                                 Upload Photos
@@ -1260,14 +1259,17 @@
             }
 
             function drawMatrix(matrix, offset) {
-            matrix.forEach((row, y) => {
-                row.forEach((value, x) => {
-                if (value !== 0) {
-                    context.fillStyle = colors[value];
-                    context.fillRect(x + offset.x, y + offset.y, 1, 1);
-                }
+                matrix.forEach((row, y) => {
+                    row.forEach((value, x) => {
+                        if (value !== 0) {
+                            context.fillStyle = colors[value];
+                            context.fillRect(x + offset.x, y + offset.y, 1, 1);
+                            context.strokeStyle = "rgba(255,255,255,0.7)";
+                            context.lineWidth = 0.06;
+                            context.strokeRect(x + offset.x, y + offset.y, 1, 1);
+                        }
+                    });
                 });
-            });
             }
 
             function draw() {
