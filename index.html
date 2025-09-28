@@ -915,7 +915,7 @@
                     </div>
 
                     <div class="tetris-container">
-                    <canvas id="tetris" width="360" height="450"></canvas>
+                    <canvas id="tetris" width="360" height="440"></canvas>
                     <div class="game-controls">
                         <button onclick="moveLeft()">⬅️</button>
                         <button onclick="moveRight()">➡️</button>
@@ -1381,7 +1381,7 @@
             requestAnimationFrame(update);
             }
 
-            const arena = createMatrix(18, 25);
+            const arena = createMatrix(18, 22);
             const player = {
             pos: { x: 0, y: 0 },
             matrix: null,
