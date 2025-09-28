@@ -717,6 +717,8 @@
             100% { opacity: 0; transform: scale(0) rotate(180deg);}
         }
 
+
+        /* kado */
         .big-gift-icon {
             font-size: 10vw;
             display: block;
@@ -1055,80 +1057,65 @@
             // Scrapbook Digital (hal3) - script unik agar tidak bentrok
             (function() {
 
-                // Upload foto
-                document.getElementById('hal3FileInput').addEventListener('change', function(e) {
-                    const files = e.target.files;
-                    for (let i = 0; i < files.length; i++) {
-                        const file = files[i];
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            setTimeout(() => {
-                                hal3CreatePhotoFrame(event.target.result);
-                                hal3CreateSparkles();
-                            }, i * 500);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
+            // Foto default (dummy)
+            const defaultPhotos = [
+                "https://picsum.photos/400/250?random=1",
+                "https://picsum.photos/400/250?random=2",
+                "https://picsum.photos/400/250?random=3"
+            ];
 
-                
-
-                function hal3CreatePhotoFrame(imageSrc) {
-                    const scrapbook = document.getElementById('hal3Scrapbook');
-                    const frame = document.createElement('div');
-                    frame.className = 'hal3-photo-frame';
-                    frame.innerHTML = `
-                        <button class="hal3-delete-btn" onclick="hal3DeletePhoto(this)">×</button>
-                        <img src="${imageSrc}" alt="Kenangan Kita">
-                        <div class="hal3-photo-caption">
-                            <input type="text" placeholder="Tulis caption untuk foto ini..." onchange="hal3SaveCaption(this)">
-                        </div>
-                    `;
-                    scrapbook.appendChild(frame);
-                    setTimeout(() => { frame.style.animationDelay = '0s'; }, 100);
-                }
-
-                // Hapus foto
-                window.hal3DeletePhoto = function(btn) {
-                    const frame = btn.parentElement;
-                    frame.style.animation = 'hal3-photoDisappear 0.5s ease-out forwards';
-                    setTimeout(() => { frame.remove(); }, 500);
-                };
-
-                // Simpan caption
-                window.hal3SaveCaption = function(input) {
-                    // Bisa simpan ke localStorage jika mau
-                    console.log('Caption saved:', input.value);
-                };
-
-                // Sparkle efek
-                function hal3CreateSparkles() {
-                    for (let i = 0; i < 10; i++) {
-                        setTimeout(() => {
-                            const sparkle = document.createElement('div');
-                            sparkle.className = 'hal3-sparkle';
-                            sparkle.innerHTML = '✨';
-                            sparkle.style.left = Math.random() * 100 + 'vw';
-                            sparkle.style.top = Math.random() * 100 + 'vh';
-                            document.body.appendChild(sparkle);
-                            setTimeout(() => { sparkle.remove(); }, 2000);
-                        }, i * 100);
-                    }
-                }
-
-                // Efek klik untuk upload/delete
-                document.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('hal3-upload-btn') ||
-                        e.target.classList.contains('hal3-delete-btn')) {
-                        hal3CreateSparkles();
-                    }
-                });
-
-                // Pesan selamat datang (opsional)
+            // Tampilkan foto default tanpa upload
+            defaultPhotos.forEach((src, i) => {
                 setTimeout(() => {
-                    console.log('💕 Selamat datang di scrapbook digital spesial! 💕');
-                }, 2000);
-            })();
+                    hal3CreatePhotoFrame(src);
+                    hal3CreateSparkles();
+                }, i * 500);
+            });
+
+            // Upload foto
+            document.getElementById('hal3FileInput').addEventListener('change', function(e) {
+                const files = e.target.files;
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        setTimeout(() => {
+                            hal3CreatePhotoFrame(event.target.result);
+                            hal3CreateSparkles();
+                        }, i * 500);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            function hal3CreatePhotoFrame(imageSrc) {
+                const scrapbook = document.getElementById('hal3Scrapbook');
+                const frame = document.createElement('div');
+                frame.className = 'hal3-photo-frame';
+                frame.innerHTML = `
+                    <button class="hal3-delete-btn" onclick="hal3DeletePhoto(this)">×</button>
+                    <img src="${imageSrc}" alt="Kenangan Kita">
+                    <div class="hal3-photo-caption">
+                        <input type="text" placeholder="Tulis caption untuk foto ini..." onchange="hal3SaveCaption(this)">
+                    </div>
+                `;
+                scrapbook.appendChild(frame);
+                setTimeout(() => { frame.style.animationDelay = '0s'; }, 100);
+            }
+
+            // Hapus foto
+            window.hal3DeletePhoto = function(btn) {
+                const frame = btn.parentElement;
+                frame.style.animation = 'hal3-photoDisappear 0.5s ease-out forwards';
+                setTimeout(() => { frame.remove(); }, 500);
+            };
+
+            // Simpan caption
+            window.hal3SaveCaption = function(input) {
+                console.log('Caption saved:', input.value);
+            };
+
+        })();
 
             function showPhotos() {
                 // Sembunyikan message section
