@@ -734,653 +734,746 @@
 
         /* tetris */
         .tetris-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        }
 
-            canvas#tetris {
-            background: #111;
-            border: 3px solid #ff69b4;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-            }
+        canvas#tetris {
+        background: #111;
+        border: 3px solid #ff69b4;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        }
 
-            .game-controls {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 10px;
-            gap: 10px;
-            }
+        .game-controls {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
+        gap: 10px;
+        }
 
-            .game-controls button {
-            background: #ff69b4;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
-            }
+        .game-controls button {
+        background: #ff69b4;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+        }
 
-            .game-controls button:active {
-            background: #d63c8a;
-            }
+        .game-controls button:active {
+        background: #d63c8a;
+        }
     </style>
 </head>
 <audio id="bgMusic" loop>
   <source src="nadin.mp3" type="audio/mpeg">
 </audio>
-<body>
-    <div class="hearts" id="hearts"></div>
-        <div class="container">
-            <section class="section welcome-section" id="welcomeSection">
-                <div class="welcome-content" style="background: none; box-shadow: none; padding: 0;">
-                    <button 
-                        class="btn" 
-                        onclick="openPinModal()" 
-                        style="background: none; box-shadow: none; border: none; padding: 0; cursor: pointer;">
-                        <span class="big-gift-icon">🎁</span>
-                    </button>
-                </div>
-        </div>
-
-        <!-- Modal PIN -->
-        <div id="pinModal" class="pin-modal">
-        <div class="pin-modal-content">
-            <h2>Anniversary🔒</h2>
-            <div class="pin-container">
-            <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin2')" id="pin1">
-            <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin3')" id="pin2">
-            <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin4')" id="pin3">
-            <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin5')" id="pin4">
-            <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin6')" id="pin5">
-            <input type="password" maxlength="1" class="pin-box" oninput="checkAutoSubmit()" id="pin6">
-            </div>
-            <p id="errorMessage" style="color:red; display:none;">❌ Memang!kamu nda sayang sama aku</p>
-        </div>
-        </div>
-        
-        <!-- Birthday Message Section -->
-        <section class="section message-section" id="messageSection">
-            <div class="message-content">
-                <h2 class="birthday-title">🎉Selamat Ulang Tahun!🎉</h2>
-                <p class="message-text" id="personalMessage"></p>
-                
-                <button class="btn next-btn" onclick="showPhotos()">Memories! 📷</button>
-            </div>
-        </section>
-
-        <!-- Photo Section -->
-        <section class="hal3-section" id="hal3Section" style="display:none;">
-            <div class="hal3-hearts"></div>
-                <div class="hal3-container">
-                    <div class="hal3-header">
-                        <h1>💕 Happy Birthday My Love 💕</h1>
-                        <p>Scrapbook digital spesial untuk orang terspesial di hidupku</p>
-                    </div>
-                    <div class="hal3-upload-section">
-                        <h2 style="color: white; margin-bottom: 20px;">Tambahkan Foto Kenangan Kita</h2>
-                        <button class="btn" onclick="document.getElementById('hal3FileInput').click()">
-                            📸 Upload Foto
+    <body>
+        <div class="hearts" id="hearts"></div>
+            <div class="container">
+                <section class="section welcome-section" id="welcomeSection">
+                    <div class="welcome-content" style="background: none; box-shadow: none; padding: 0;">
+                        <button 
+                            class="btn" 
+                            onclick="openPinModal()" 
+                            style="background: none; box-shadow: none; border: none; padding: 0; cursor: pointer;">
+                            <span class="big-gift-icon">🎁</span>
                         </button>
-                        <input type="file" id="hal3FileInput" accept="image/*" multiple>
                     </div>
-                    <div class="hal3-scrapbook" id="hal3Scrapbook"></div>
-                    <div class="hal3-love-quotes">
-                        <h2>💖 Kata-kata Cinta 💖</h2>
-                        <div class="hal3-quote">"Setiap detik bersamamu adalah hadiah terbaik dalam hidupku"</div>
-                        <div class="hal3-quote">"Kamu adalah alasan mengapa aku percaya pada keajaiban"</div>
-                        <div class="hal3-quote">"Happy birthday to the most amazing person in my world"</div>
-                        <button class="btn" onclick="showLoveGame()">Tetris! 💕</button>
+            </div>
+
+            <!-- Modal PIN -->
+            <div id="pinModal" class="pin-modal">
+            <div class="pin-modal-content">
+                <h2>Anniversary🔒</h2>
+                <div class="pin-container">
+                <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin2')" id="pin1">
+                <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin3')" id="pin2">
+                <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin4')" id="pin3">
+                <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin5')" id="pin4">
+                <input type="password" maxlength="1" class="pin-box" oninput="moveNext(this, 'pin6')" id="pin5">
+                <input type="password" maxlength="1" class="pin-box" oninput="checkAutoSubmit()" id="pin6">
+                </div>
+                <p id="errorMessage" style="color:red; display:none;">❌ Memang!kamu nda sayang sama aku</p>
+            </div>
+            </div>
+            
+            <!-- Birthday Message Section -->
+            <section class="section message-section" id="messageSection">
+                <div class="message-content">
+                    <h2 class="birthday-title">🎉Selamat Ulang Tahun!🎉</h2>
+                    <p class="message-text" id="personalMessage"></p>
+                    
+                    <button class="btn next-btn" onclick="showPhotos()">Memories! 📷</button>
+                </div>
+            </section>
+
+            <!-- Photo Section -->
+            <section class="hal3-section" id="hal3Section" style="display:none;">
+                <div class="hal3-hearts"></div>
+                    <div class="hal3-container">
+                        <div class="hal3-header">
+                            <h1>💕 Happy Birthday My Love 💕</h1>
+                            <p>Scrapbook digital spesial untuk orang terspesial di hidupku</p>
+                        </div>
+                        <div class="hal3-upload-section">
+                            <h2 style="color: white; margin-bottom: 20px;">Tambahkan Foto Kenangan Kita</h2>
+                            <button class="btn" onclick="document.getElementById('hal3FileInput').click()">
+                                📸 Upload Foto
+                            </button>
+                            <input type="file" id="hal3FileInput" accept="image/*" multiple>
+                        </div>
+                        <div class="hal3-scrapbook" id="hal3Scrapbook"></div>
+                        <div class="hal3-love-quotes">
+                            <h2>💖 Kata-kata Cinta 💖</h2>
+                            <div class="hal3-quote">"Setiap detik bersamamu adalah hadiah terbaik dalam hidupku"</div>
+                            <div class="hal3-quote">"Kamu adalah alasan mengapa aku percaya pada keajaiban"</div>
+                            <div class="hal3-quote">"Happy birthday to the most amazing person in my world"</div>
+                            <button class="btn" onclick="showLoveGame()">Tetris! 💕</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Modal Popup -->
-        <div id="photoModal" class="modal" style="display:none;">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <img id="modalImg" src= "" alt="Foto Popup" style="max-width:100%; border-radius:10px;">
-                <p id="modalDesc" style="margin-top:10px; color:#333;"></p>
+            <!-- Modal Popup -->
+            <div id="photoModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <img id="modalImg" src= "" alt="Foto Popup" style="max-width:100%; border-radius:10px;">
+                    <p id="modalDesc" style="margin-top:10px; color:#333;"></p>
+                </div>
             </div>
+
+            <!-- Love Game Section -->
+            <section class="section love-section" id="loveSection">
+                <div class="message-content">
+                    <h2>💕 Love Game 💕</h2>
+                    <div class="love-message">
+                    Ayo main Tetris bareng! 🎮
+                    </div>
+
+                    <div class="tetris-container">
+                    <canvas id="tetris" width="240" height="400"></canvas>
+                    <div class="game-controls">
+                        <button onclick="moveLeft()">⬅️</button>
+                        <button onclick="moveRight()">➡️</button>
+                        <button onclick="rotatePiece()">🔄</button>
+                        <button onclick="dropPiece()">⬇️</button>
+                    </div>
+                    <div id="gameStatus" style="margin-top:10px; font-weight:bold; color:#ff69b4;"></div>
+                    </div>
+
+                    <button class="btn" onclick="showFinalSurprise()">Kejutan Terakhir! 🎁</button>
+                </div>
+            </section>
+            
+            <!-- Final Surprise Section -->
+            <section class="section surprise-section" id="surpriseSection">
+                <div class="message-content">
+                    <div class="cake">🎂</div>
+                    <h2 class="birthday-title" id="finalTitle">Happy Birthday Syafiratul Atika S.Psi! 🎉</h2>
+                    <p class="final-message">
+                        Semoga di tahun yang baru ini, semua impian dan harapanmu menjadi kenyataan. 
+                        Semoga kebahagiaan selalu menyertai langkahmu, mungkin langkahmu tidak semudah kebanyakan orang lain tapi kamu berhasil
+                        melangkah disetiap harinya, kamu berhasil menjadi lebih baik dari hari kemarin, bahkan disaat hari terburuk pun kamu masih
+                        mencoba untuk tersenyum dengan tulus untuk melaluinya.
+
+                        <br><br>
+                        Aku tidak berjanji untuk selalu ada untuk mu tetapi aku berjanji bahwa akan memberikan yang terbaik untukmu. sorry, hadiah
+                        yang ku berikan belum seberapa tapi percaya itu semua yang aku punya 😊
+                        <br><br>
+                        <strong>🎈Selamat Ulang Tahun🎈</strong>
+                        <br>
+                        <em>i will care about you, in every way i can❤️</em>
+                    </p>
+                </div>
+            </section>
         </div>
 
-        <!-- Love Game Section -->
-        <section class="section love-section" id="loveSection">
-            <div class="message-content">
-                <h2>💕 Love Game 💕</h2>
-                <div class="love-message">
-                Ayo main Tetris bareng! 🎮
-                </div>
+        <script>
+            function showLoveGame() {
+        // Sembunyikan scrapbook section
+        document.getElementById('hal3Section').style.display = 'none';
+        // Tampilkan love-section (Tetris)
+        document.getElementById('loveSection').style.display = 'flex';
+        document.getElementById('loveSection').scrollIntoView({ behavior: 'smooth' });
+    }
+            const correctPin = "100824";
 
-                <div class="tetris-container">
-                <canvas id="tetris" width="240" height="400"></canvas>
-                <div class="game-controls">
-                    <button onclick="moveLeft()">⬅️</button>
-                    <button onclick="moveRight()">➡️</button>
-                    <button onclick="rotatePiece()">🔄</button>
-                    <button onclick="dropPiece()">⬇️</button>
-                </div>
-                </div>
-
-                <button class="btn" onclick="showFinalSurprise()">Kejutan Terakhir! 🎁</button>
-            </div>
-        </section>
-        
-        <!-- Final Surprise Section -->
-        <section class="section surprise-section" id="surpriseSection">
-            <div class="message-content">
-                <div class="cake">🎂</div>
-                <h2 class="birthday-title" id="finalTitle">Happy Birthday Syafiratul Atika S.Psi! 🎉</h2>
-                <p class="final-message">
-                    Semoga di tahun yang baru ini, semua impian dan harapanmu menjadi kenyataan. 
-                    Semoga kebahagiaan selalu menyertai langkahmu, mungkin langkahmu tidak semudah kebanyakan orang lain tapi kamu berhasil
-                    melangkah disetiap harinya, kamu berhasil menjadi lebih baik dari hari kemarin, bahkan disaat hari terburuk pun kamu masih
-                    mencoba untuk tersenyum dengan tulus untuk melaluinya.
-
-                    <br><br>
-                    Aku tidak berjanji untuk selalu ada untuk mu tetapi aku berjanji bahwa akan memberikan yang terbaik untukmu. sorry, hadiah
-                    yang ku berikan belum seberapa tapi percaya itu semua yang aku punya 😊
-                    <br><br>
-                    <strong>🎈Selamat Ulang Tahun🎈</strong>
-                    <br>
-                    <em>i will care about you, in every way i can❤️</em>
-                </p>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        function showLoveGame() {
-    // Sembunyikan scrapbook section
-    document.getElementById('hal3Section').style.display = 'none';
-    // Tampilkan love-section (Tetris)
-    document.getElementById('loveSection').style.display = 'flex';
-    document.getElementById('loveSection').scrollIntoView({ behavior: 'smooth' });
-}
-        const correctPin = "100824";
-
-        function openPinModal() {
-            document.getElementById("pinModal").style.display = "flex";
-            document.getElementById("pin1").focus();
-        }
-
-        function moveNext(current, nextId) {
-            if (current.value.length === 1 && nextId) {
-            document.getElementById(nextId).focus();
-            }
-            checkAutoSubmit();
-        }
-
-        function checkAutoSubmit() {
-            let pin = "";
-            for (let i = 1; i <= 6; i++) {
-            pin += document.getElementById("pin" + i).value;
+            function openPinModal() {
+                document.getElementById("pinModal").style.display = "flex";
+                document.getElementById("pin1").focus();
             }
 
-            if (pin.length === 6) {
-            checkPin(pin);
+            function moveNext(current, nextId) {
+                if (current.value.length === 1 && nextId) {
+                document.getElementById(nextId).focus();
+                }
+                checkAutoSubmit();
             }
-        }
 
-        function checkPin(pin) {
-            const errorMsg = document.getElementById("errorMessage");
+            function checkAutoSubmit() {
+                let pin = "";
+                for (let i = 1; i <= 6; i++) {
+                pin += document.getElementById("pin" + i).value;
+                }
 
-            if (pin === correctPin) {
-            errorMsg.style.display = "none";
-            closePinModal();
-            startSurprise();
-            } else {
-            errorMsg.style.display = "block";
-            shakeModal();
-            resetPin();
-            }
-        }
-
-        function closePinModal() {
-            document.getElementById("pinModal").style.display = "none";
-            resetPin();
-        }
-
-        function resetPin() {
-            for (let i = 1; i <= 6; i++) {
-            document.getElementById("pin" + i).value = "";
-            }
-            document.getElementById("pin1").focus();
-        }
-
-        function startSurprise() {
-            alert("🎉 Selamat datang di kejutan spesial! 💖");
-            // bisa diarahkan ke halaman / animasi
-        }
-
-        function shakeModal() {
-            const modal = document.querySelector(".pin-modal-content");
-            modal.classList.add("shake");
-            setTimeout(() => modal.classList.remove("shake"), 500);
-        }
-        
-        
-        // tesk ketik 
-        function typeText() {
-            const message = `Hari ini adalah hari yang sangat istimewa, karena hari ini adalah hari kelahiran Syafiratul Atika, salah satu manusia yang paling berarti dalam hidupku. 
-            Setiap detik bersamamu adalah anugerah yang tak ternilai. Senyummu adalah sinar matahari yang menerangi hariku, tawamu adalah melodi terindah yang pernah kudengar, dan cintamu adalah rumah yang paling nyaman bagiku.
-            Di hari spesialmu ini, aku ingin kamu tahu betapa bersyukurnya aku memilikimu. Kamu bukan hanya kekasih, tapi juga sahabat terbaik, partner hidup, dan alasan aku untuk terus berkembang menjadi lebih baik.`;
-
-            const container = document.getElementById('personalMessage');
-            let index = 0;
-
-            const chars = Array.from(message);
-
-            function typeNext() {
-                if (index < chars.length) {
-                    container.innerHTML += chars[index] === '\n' ? '<br><br>' : chars[index];
-                    index++;
-                    setTimeout(typeNext, 80);
+                if (pin.length === 6) {
+                checkPin(pin);
                 }
             }
 
-            typeNext();
-        }
+            function checkPin(pin) {
+                const errorMsg = document.getElementById("errorMessage");
 
-        function playMusic() {
-            const music = document.getElementById('bgMusic');
-            music.play().catch(err => {
-                console.log("Autoplay dicegah, menunggu interaksi user.", err);
-            });
-        }
-
-        function startSurprise() {
-            playMusic();
-
-            if (window.navigator.vibrate) {
-                window.navigator.vibrate(200);
+                if (pin === correctPin) {
+                errorMsg.style.display = "none";
+                closePinModal();
+                startSurprise();
+                } else {
+                errorMsg.style.display = "block";
+                shakeModal();
+                resetPin();
+                }
             }
 
-            const welcomeSection = document.getElementById('welcomeSection');
-            const messageSection = document.getElementById('messageSection');
-
-            welcomeSection.classList.remove('active');
-
-            setTimeout(() => {
-                welcomeSection.style.display = 'none';
-                messageSection.style.display = 'flex';
-                messageSection.classList.add('active');
-                createSparkles(messageSection);
-
-                typeText(); 
-            }, 100);
-        }
-        // Scrapbook Digital (hal3) - script unik agar tidak bentrok
-        (function() {
-            // Animasi hati
-            function hal3CreateHeart() {
-                const heart = document.createElement('div');
-                heart.className = 'hal3-heart';
-                heart.innerHTML = '💖';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                heart.style.animationDelay = Math.random() * 2 + 's';
-                document.querySelector('.hal3-hearts').appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 6000);
+            function closePinModal() {
+                document.getElementById("pinModal").style.display = "none";
+                resetPin();
             }
-            setInterval(hal3CreateHeart, 1000);
 
-            // Upload foto
-            document.getElementById('hal3FileInput').addEventListener('change', function(e) {
-                const files = e.target.files;
-                for (let i = 0; i < files.length; i++) {
-                    const file = files[i];
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
+            function resetPin() {
+                for (let i = 1; i <= 6; i++) {
+                document.getElementById("pin" + i).value = "";
+                }
+                document.getElementById("pin1").focus();
+            }
+
+            function startSurprise() {
+                alert("🎉 Selamat datang di kejutan spesial! 💖");
+                // bisa diarahkan ke halaman / animasi
+            }
+
+            function shakeModal() {
+                const modal = document.querySelector(".pin-modal-content");
+                modal.classList.add("shake");
+                setTimeout(() => modal.classList.remove("shake"), 500);
+            }
+            
+            
+            // tesk ketik 
+            function typeText() {
+                const message = `Hari ini adalah hari yang sangat istimewa, karena hari ini adalah hari kelahiran Syafiratul Atika, salah satu manusia yang paling berarti dalam hidupku. 
+                Setiap detik bersamamu adalah anugerah yang tak ternilai. Senyummu adalah sinar matahari yang menerangi hariku, tawamu adalah melodi terindah yang pernah kudengar, dan cintamu adalah rumah yang paling nyaman bagiku.
+                Di hari spesialmu ini, aku ingin kamu tahu betapa bersyukurnya aku memilikimu. Kamu bukan hanya kekasih, tapi juga sahabat terbaik, partner hidup, dan alasan aku untuk terus berkembang menjadi lebih baik.`;
+
+                const container = document.getElementById('personalMessage');
+                let index = 0;
+
+                const chars = Array.from(message);
+
+                function typeNext() {
+                    if (index < chars.length) {
+                        container.innerHTML += chars[index] === '\n' ? '<br><br>' : chars[index];
+                        index++;
+                        setTimeout(typeNext, 80);
+                    }
+                }
+
+                typeNext();
+            }
+
+            function playMusic() {
+                const music = document.getElementById('bgMusic');
+                music.play().catch(err => {
+                    console.log("Autoplay dicegah, menunggu interaksi user.", err);
+                });
+            }
+
+            function startSurprise() {
+                playMusic();
+
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(200);
+                }
+
+                const welcomeSection = document.getElementById('welcomeSection');
+                const messageSection = document.getElementById('messageSection');
+
+                welcomeSection.classList.remove('active');
+
+                setTimeout(() => {
+                    welcomeSection.style.display = 'none';
+                    messageSection.style.display = 'flex';
+                    messageSection.classList.add('active');
+                    createSparkles(messageSection);
+
+                    typeText(); 
+                }, 100);
+            }
+            // Scrapbook Digital (hal3) - script unik agar tidak bentrok
+            (function() {
+                // Animasi hati
+                function hal3CreateHeart() {
+                    const heart = document.createElement('div');
+                    heart.className = 'hal3-heart';
+                    heart.innerHTML = '💖';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    document.querySelector('.hal3-hearts').appendChild(heart);
+                    setTimeout(() => { heart.remove(); }, 6000);
+                }
+                setInterval(hal3CreateHeart, 1000);
+
+                // Upload foto
+                document.getElementById('hal3FileInput').addEventListener('change', function(e) {
+                    const files = e.target.files;
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            setTimeout(() => {
+                                hal3CreatePhotoFrame(event.target.result);
+                                hal3CreateSparkles();
+                            }, i * 500);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+
+                
+
+                function hal3CreatePhotoFrame(imageSrc) {
+                    const scrapbook = document.getElementById('hal3Scrapbook');
+                    const frame = document.createElement('div');
+                    frame.className = 'hal3-photo-frame';
+                    frame.innerHTML = `
+                        <button class="hal3-delete-btn" onclick="hal3DeletePhoto(this)">×</button>
+                        <img src="${imageSrc}" alt="Kenangan Kita">
+                        <div class="hal3-photo-caption">
+                            <input type="text" placeholder="Tulis caption untuk foto ini..." onchange="hal3SaveCaption(this)">
+                        </div>
+                    `;
+                    scrapbook.appendChild(frame);
+                    setTimeout(() => { frame.style.animationDelay = '0s'; }, 100);
+                }
+
+                // Hapus foto
+                window.hal3DeletePhoto = function(btn) {
+                    const frame = btn.parentElement;
+                    frame.style.animation = 'hal3-photoDisappear 0.5s ease-out forwards';
+                    setTimeout(() => { frame.remove(); }, 500);
+                };
+
+                // Simpan caption
+                window.hal3SaveCaption = function(input) {
+                    // Bisa simpan ke localStorage jika mau
+                    console.log('Caption saved:', input.value);
+                };
+
+                // Sparkle efek
+                function hal3CreateSparkles() {
+                    for (let i = 0; i < 10; i++) {
                         setTimeout(() => {
-                            hal3CreatePhotoFrame(event.target.result);
-                            hal3CreateSparkles();
-                        }, i * 500);
-                    };
-                    reader.readAsDataURL(file);
+                            const sparkle = document.createElement('div');
+                            sparkle.className = 'hal3-sparkle';
+                            sparkle.innerHTML = '✨';
+                            sparkle.style.left = Math.random() * 100 + 'vw';
+                            sparkle.style.top = Math.random() * 100 + 'vh';
+                            document.body.appendChild(sparkle);
+                            setTimeout(() => { sparkle.remove(); }, 2000);
+                        }, i * 100);
+                    }
                 }
+
+                // Efek klik untuk upload/delete
+                document.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('hal3-upload-btn') ||
+                        e.target.classList.contains('hal3-delete-btn')) {
+                        hal3CreateSparkles();
+                    }
+                });
+
+                // Pesan selamat datang (opsional)
+                setTimeout(() => {
+                    console.log('💕 Selamat datang di scrapbook digital spesial! 💕');
+                }, 2000);
+            })();
+
+            function showPhotos() {
+                // Sembunyikan message section
+                document.getElementById('messageSection').style.display = 'none';
+                // Tampilkan scrapbook section
+                document.getElementById('hal3Section').style.display = 'block';
+                // Scroll ke scrapbook section (opsional)
+                document.getElementById('hal3Section').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // TETRIS GAME
+            const canvas = document.getElementById("tetris");
+            const context = canvas.getContext("2d");
+            context.scale(20, 20);
+
+            const colors = [
+            null,
+            "#00f0f0", // I - Cyan
+            "#0000f0", // J - Biru
+            "#f0a000", // L - Orange
+            "#f0f000", // O - Kuning
+            "#00f000", // S - Hijau
+            "#a000f0", // T - Ungu
+            "#f00000", // Z - Merah
+            ];
+
+            function arenaSweep() {
+            let rowCount = 1;
+            outer: for (let y = arena.length - 1; y >= 0; --y) {
+                for (let x = 0; x < arena[y].length; ++x) {
+                if (arena[y][x] === 0) {
+                    continue outer;
+                }
+                }
+                const row = arena.splice(y, 1)[0].fill(0);
+                arena.unshift(row);
+                ++y;
+            }
+            }
+
+            function collide(arena, player) {
+            const m = player.matrix;
+            const o = player.pos;
+            for (let y = 0; y < m.length; ++y) {
+                for (let x = 0; x < m[y].length; ++x) {
+                if (
+                    m[y][x] !== 0 &&
+                    (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0
+                ) {
+                    return true;
+                }
+                }
+            }
+            return false;
+            }
+
+            function createMatrix(w, h) {
+            const matrix = [];
+            while (h--) {
+                matrix.push(new Array(w).fill(0));
+            }
+            return matrix;
+            }
+
+            function createPiece(type) {
+            if (type === "T") {
+                return [
+                [0, 0, 0],
+                [1, 1, 1],
+                [0, 1, 0],
+                ];
+            } else if (type === "O") {
+                return [
+                [2, 2],
+                [2, 2],
+                ];
+            } else if (type === "L") {
+                return [
+                [0, 3, 0],
+                [0, 3, 0],
+                [0, 3, 3],
+                ];
+            } else if (type === "J") {
+                return [
+                [0, 4, 0],
+                [0, 4, 0],
+                [4, 4, 0],
+                ];
+            } else if (type === "I") {
+                return [
+                [0, 5, 0, 0],
+                [0, 5, 0, 0],
+                [0, 5, 0, 0],
+                [0, 5, 0, 0],
+                ];
+            } else if (type === "S") {
+                return [
+                [0, 6, 6],
+                [6, 6, 0],
+                [0, 0, 0],
+                ];
+            } else if (type === "Z") {
+                return [
+                [7, 7, 0],
+                [0, 7, 7],
+                [0, 0, 0],
+                ];
+            }
+            }
+
+            function drawMatrix(matrix, offset) {
+            matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                if (value !== 0) {
+                    context.fillStyle = colors[value];
+                    context.fillRect(x + offset.x, y + offset.y, 1, 1);
+                }
+                });
+            });
+            }
+
+            function draw() {
+            context.fillStyle = "#111";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            drawMatrix(arena, { x: 0, y: 0 });
+            drawMatrix(player.matrix, player.pos);
+            }
+
+            function merge(arena, player) {
+            player.matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                if (value !== 0) {
+                    arena[y + player.pos.y][x + player.pos.x] = value;
+                }
+                });
+            });
+            }
+
+            function playerDrop() {
+            player.pos.y++;
+            if (collide(arena, player)) {
+                player.pos.y--;
+                merge(arena, player);
+                playerReset();
+                arenaSweep();
+            }
+            dropCounter = 0;
+            }
+
+            function playerMove(dir) {
+            player.pos.x += dir;
+            if (collide(arena, player)) {
+                player.pos.x -= dir;
+            }
+            }
+
+            function playerReset() {
+            const pieces = "TJLOSZI";
+            player.matrix = createPiece(
+                pieces[(pieces.length * Math.random()) | 0]
+            );
+            player.pos.y = 0;
+            player.pos.x =
+                ((arena[0].length / 2) | 0) -
+                ((player.matrix[0].length / 2) | 0);
+
+            // cek game over
+            if (collide(arena, player)) {
+                document.getElementById("gameStatus").innerText = "Game Over 😢";
+                arena.forEach(row => row.fill(0));
+            } else {
+                document.getElementById("gameStatus").innerText = "";
+            }
+            }
+
+            function playerRotate() {
+            const pos = player.pos.x;
+            let offset = 1;
+            rotate(player.matrix);
+            while (collide(arena, player)) {
+                player.pos.x += offset;
+                offset = -(offset + (offset > 0 ? 1 : -1));
+                if (offset > player.matrix[0].length) {
+                rotate(player.matrix, -1);
+                player.pos.x = pos;
+                return;
+                }
+            }
+            }
+
+            function rotate(matrix, dir = 1) {
+            for (let y = 0; y < matrix.length; ++y) {
+                for (let x = 0; x < y; ++x) {
+                [matrix[x][y], matrix[y][x]] = [
+                    matrix[y][x],
+                    matrix[x][y],
+                ];
+                }
+            }
+            if (dir > 0) {
+                matrix.forEach(row => row.reverse());
+            } else {
+                matrix.reverse();
+            }
+            }
+
+            let dropCounter = 0;
+            let dropInterval = 1000;
+            let lastTime = 0;
+
+            function update(time = 0) {
+            const deltaTime = time - lastTime;
+            lastTime = time;
+
+            dropCounter += deltaTime;
+            if (dropCounter > dropInterval) {
+                playerDrop();
+            }
+
+            draw();
+            requestAnimationFrame(update);
+            }
+
+            const arena = createMatrix(12, 20);
+            const player = {
+            pos: { x: 0, y: 0 },
+            matrix: null,
+            };
+
+            document.addEventListener("keydown", event => {
+            if (event.key === "ArrowLeft") {
+                playerMove(-1);
+            } else if (event.key === "ArrowRight") {
+                playerMove(1);
+            } else if (event.key === "ArrowDown") {
+                playerDrop();
+            } else if (event.key === "ArrowUp") {
+                playerRotate();
+            }
             });
 
+            // kontrol mobile
+            function moveLeft() { playerMove(-1); }
+            function moveRight() { playerMove(1); }
+            function dropPiece() { playerDrop(); }
+            function rotatePiece() { playerRotate(); }
+
+            playerReset();
+            update();
             
 
-            function hal3CreatePhotoFrame(imageSrc) {
-                const scrapbook = document.getElementById('hal3Scrapbook');
-                const frame = document.createElement('div');
-                frame.className = 'hal3-photo-frame';
-                frame.innerHTML = `
-                    <button class="hal3-delete-btn" onclick="hal3DeletePhoto(this)">×</button>
-                    <img src="${imageSrc}" alt="Kenangan Kita">
-                    <div class="hal3-photo-caption">
-                        <input type="text" placeholder="Tulis caption untuk foto ini..." onchange="hal3SaveCaption(this)">
-                    </div>
-                `;
-                scrapbook.appendChild(frame);
-                setTimeout(() => { frame.style.animationDelay = '0s'; }, 100);
+
+            function showFinalSurprise() {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate([100, 50, 100]);
+                }
+                
+                const loveSection = document.getElementById('loveSection');
+                const surpriseSection = document.getElementById('surpriseSection');
+                
+                loveSection.style.opacity = '0';
+                loveSection.style.transform = 'translateY(-50px)';
+                
+                setTimeout(() => {
+                    loveSection.style.display = 'none';
+                    surpriseSection.style.display = 'flex';
+                    surpriseSection.scrollIntoView({ behavior: 'smooth' });
+                    createSparkles(surpriseSection);
+                    setTimeout(() => {
+                            startConfetti(200);
+                    }, 500);
+                }, 300);
+            }
+            
+            function showSurprise() {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate([100, 50, 100]);
+                }
+                
+                const messageSection = document.getElementById('messageSection');
+                const surpriseSection = document.getElementById('surpriseSection');
+                
+                messageSection.style.opacity = '0';
+                messageSection.style.transform = 'translateY(-50px)';
+                
+                setTimeout(() => {
+                    messageSection.style.display = 'none';
+                    surpriseSection.style.display = 'flex';
+                    surpriseSection.scrollIntoView({ behavior: 'smooth' });
+                    createSparkles(surpriseSection);
+                    setTimeout(() => {
+                        for (let i = 0; i < 30; i++) {
+                            createConfetti();
+                        }
+                    }, 500);
+                }, 300);
             }
 
-            // Hapus foto
-            window.hal3DeletePhoto = function(btn) {
-                const frame = btn.parentElement;
-                frame.style.animation = 'hal3-photoDisappear 0.5s ease-out forwards';
-                setTimeout(() => { frame.remove(); }, 500);
-            };
-
-            // Simpan caption
-            window.hal3SaveCaption = function(input) {
-                // Bisa simpan ke localStorage jika mau
-                console.log('Caption saved:', input.value);
-            };
-
-            // Sparkle efek
-            function hal3CreateSparkles() {
+            // Create floating hearts
+            function createHearts() {
+                const heartsContainer = document.getElementById('hearts');
+                const heartSymbols = ['💖', '💕', '💗', '💓', '💝', '🌹', '✨'];
+                
+                setInterval(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    heartsContainer.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }, 300);
+            }
+            
+            function createSparkles(element) {
+                const sparkles = ['✨', '⭐', '💫', '🌟'];
                 for (let i = 0; i < 10; i++) {
                     setTimeout(() => {
                         const sparkle = document.createElement('div');
-                        sparkle.className = 'hal3-sparkle';
-                        sparkle.innerHTML = '✨';
-                        sparkle.style.left = Math.random() * 100 + 'vw';
-                        sparkle.style.top = Math.random() * 100 + 'vh';
-                        document.body.appendChild(sparkle);
-                        setTimeout(() => { sparkle.remove(); }, 2000);
-                    }, i * 100);
+                        sparkle.className = 'sparkle';
+                        sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
+                        sparkle.style.left = Math.random() * 100 + '%';
+                        sparkle.style.top = Math.random() * 100 + '%';
+                        element.appendChild(sparkle);
+                        
+                        setTimeout(() => sparkle.remove(), 2000);
+                    }, i * 200);
                 }
             }
-
-            // Efek klik untuk upload/delete
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('hal3-upload-btn') ||
-                    e.target.classList.contains('hal3-delete-btn')) {
-                    hal3CreateSparkles();
-                }
-            });
-
-            // Pesan selamat datang (opsional)
-            setTimeout(() => {
-                console.log('💕 Selamat datang di scrapbook digital spesial! 💕');
-            }, 2000);
-        })();
-
-        function showPhotos() {
-            // Sembunyikan message section
-            document.getElementById('messageSection').style.display = 'none';
-            // Tampilkan scrapbook section
-            document.getElementById('hal3Section').style.display = 'block';
-            // Scroll ke scrapbook section (opsional)
-            document.getElementById('hal3Section').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // TETRIS GAME
-        const canvas = document.getElementById("tetris");
-        const context = canvas.getContext("2d");
-        context.scale(20, 20);
-
-        const matrix = [
-        [0,0,0],
-        [1,1,1],
-        [0,1,0],
-        ];
-
-        function createMatrix(w, h) {
-        const matrix = [];
-        while (h--) {
-            matrix.push(new Array(w).fill(0));
-        }
-        return matrix;
-        }
-
-        function drawMatrix(matrix, offset) {
-        matrix.forEach((row, y) => {
-            row.forEach((value, x) => {
-            if (value !== 0) {
-                context.fillStyle = "pink";
-                context.fillRect(x + offset.x, y + offset.y, 1, 1);
-            }
-            });
-        });
-        }
-
-        function merge(arena, player) {
-        player.matrix.forEach((row, y) => {
-            row.forEach((value, x) => {
-            if (value !== 0) {
-                arena[y + player.pos.y][x + player.pos.x] = value;
-            }
-            });
-        });
-        }
-
-        function collide(arena, player) {
-        const m = player.matrix;
-        const o = player.pos;
-        for (let y = 0; y < m.length; ++y) {
-            for (let x = 0; x < m[y].length; ++x) {
-            if (
-                m[y][x] !== 0 &&
-                (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0
-            ) {
-                return true;
-            }
-            }
-        }
-        return false;
-        }
-
-        function playerDrop() {
-        player.pos.y++;
-        if (collide(arena, player)) {
-            player.pos.y--;
-            merge(arena, player);
-            playerReset();
-        }
-        dropCounter = 0;
-        }
-
-        function playerMove(dir) {
-        player.pos.x += dir;
-        if (collide(arena, player)) {
-            player.pos.x -= dir;
-        }
-        }
-
-        function playerReset() {
-        player.matrix = matrix;
-        player.pos.y = 0;
-        player.pos.x = ((arena[0].length / 2) | 0) - 
-                        ((player.matrix[0].length / 2) | 0);
-        }
-
-        function playerRotate() {
-        const m = player.matrix;
-        for (let y = 0; y < m.length; ++y) {
-            for (let x = 0; x < y; ++x) {
-            [m[x][y], m[y][x]] = [m[y][x], m[x][y]];
-            }
-        }
-        m.forEach(row => row.reverse());
-        if (collide(arena, player)) {
-            playerRotate(); // coba lagi kalau mentok
-        }
-        }
-
-        let dropCounter = 0;
-        let dropInterval = 1000;
-        let lastTime = 0;
-
-        function update(time = 0) {
-        const deltaTime = time - lastTime;
-        lastTime = time;
-
-        dropCounter += deltaTime;
-        if (dropCounter > dropInterval) {
-            playerDrop();
-        }
-
-        draw();
-        requestAnimationFrame(update);
-        }
-
-        function draw() {
-        context.fillStyle = "#111";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        drawMatrix(arena, {x:0,y:0});
-        drawMatrix(player.matrix, player.pos);
-        }
-
-        const arena = createMatrix(12, 20);
-        const player = {
-        pos: {x: 5, y: 0},
-        matrix: matrix,
-        };
-
-        document.addEventListener("keydown", event => {
-        if (event.key === "ArrowLeft") {
-            playerMove(-1);
-        } else if (event.key === "ArrowRight") {
-            playerMove(1);
-        } else if (event.key === "ArrowDown") {
-            playerDrop();
-        } else if (event.key === "ArrowUp") {
-            playerRotate();
-        }
-        });
-
-        // kontrol untuk mobile
-        function moveLeft() { playerMove(-1); }
-        function moveRight() { playerMove(1); }
-        function dropPiece() { playerDrop(); }
-        function rotatePiece() { playerRotate(); }
-
-        playerReset();
-        update();
-
-        
-
-
-
-
-        function showFinalSurprise() {
-            if (window.navigator.vibrate) {
-                window.navigator.vibrate([100, 50, 100]);
-            }
             
-            const loveSection = document.getElementById('loveSection');
-            const surpriseSection = document.getElementById('surpriseSection');
-            
-            loveSection.style.opacity = '0';
-            loveSection.style.transform = 'translateY(-50px)';
-            
-            setTimeout(() => {
-                loveSection.style.display = 'none';
-                surpriseSection.style.display = 'flex';
-                surpriseSection.scrollIntoView({ behavior: 'smooth' });
-                createSparkles(surpriseSection);
-                setTimeout(() => {
-                        startConfetti(200);
-                }, 500);
-            }, 300);
-        }
-        
-        function showSurprise() {
-            if (window.navigator.vibrate) {
-                window.navigator.vibrate([100, 50, 100]);
-            }
-            
-            const messageSection = document.getElementById('messageSection');
-            const surpriseSection = document.getElementById('surpriseSection');
-            
-            messageSection.style.opacity = '0';
-            messageSection.style.transform = 'translateY(-50px)';
-            
-            setTimeout(() => {
-                messageSection.style.display = 'none';
-                surpriseSection.style.display = 'flex';
-                surpriseSection.scrollIntoView({ behavior: 'smooth' });
-                createSparkles(surpriseSection);
-                setTimeout(() => {
-                    for (let i = 0; i < 30; i++) {
-                        createConfetti();
-                    }
-                }, 500);
-            }, 300);
-        }
-
-        // Create floating hearts
-        function createHearts() {
-            const heartsContainer = document.getElementById('hearts');
-            const heartSymbols = ['💖', '💕', '💗', '💓', '💝', '🌹', '✨'];
-            
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                heart.style.animationDelay = Math.random() * 2 + 's';
-                heartsContainer.appendChild(heart);
+            function createConfetti() {
+                const confetti = document.createElement('div');
+                const confettiSymbols = ['🎉', '🎊', '🎈', '🎁', '🌈', '⭐', '✨'];
+                confetti.innerHTML = confettiSymbols[Math.floor(Math.random() * confettiSymbols.length)];
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.fontSize = Math.random() * 20 + 15 + 'px';
+                confetti.style.zIndex = '1000';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(confetti);
                 
-                setTimeout(() => {
-                    heart.remove();
-                }, 8000);
-            }, 300);
-        }
-        
-        function createSparkles(element) {
-            const sparkles = ['✨', '⭐', '💫', '🌟'];
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    const sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle';
-                    sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
-                    sparkle.style.left = Math.random() * 100 + '%';
-                    sparkle.style.top = Math.random() * 100 + '%';
-                    element.appendChild(sparkle);
-                    
-                    setTimeout(() => sparkle.remove(), 2000);
-                }, i * 200);
+                setTimeout(() => confetti.remove(), 5000);
             }
-        }
-        
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            const confettiSymbols = ['🎉', '🎊', '🎈', '🎁', '🌈', '⭐', '✨'];
-            confetti.innerHTML = confettiSymbols[Math.floor(Math.random() * confettiSymbols.length)];
-            confetti.style.position = 'fixed';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.top = '-10px';
-            confetti.style.fontSize = Math.random() * 20 + 15 + 'px';
-            confetti.style.zIndex = '1000';
-            confetti.style.pointerEvents = 'none';
-            confetti.style.animation = `float ${Math.random() * 3 + 2}s linear forwards`;
-            document.body.appendChild(confetti);
+            function startConfetti(amount = 50) {
+                for (let i = 0; i < amount; i++) {
+                    createConfetti();
+                }
+            }
             
-            setTimeout(() => confetti.remove(), 5000);
-        }
-        function startConfetti(amount = 50) {
-            for (let i = 0; i < amount; i++) {
-                createConfetti();
-            }
-        }
-        
-        // Initialize hearts animation
-        createHearts();
-        // Add click effects to photos
-        document.querySelectorAll('.photo').forEach(photo => {
-            photo.addEventListener('click', function() {
-                this.style.transform = 'scale(1) rotate(5deg)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                }, 100);
-                createSparkles(this);
-            });
-        });
-    </script>
-</body>
+            // Initialize hearts animation
+            createHearts();
+            // Add click effects to photos
+            document.querySelectorAll('.photo').forEach(photo => {
+                photo.addEventListener('click', function() {
+                    this.style.transform = 'scale(1) rotate(5deg)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1) rotate(0deg)';
+                    }, 100);
+                    createSparkles(this);
+                });
+            });                                                                                                     
+        </script>
+    </body>
 </html>
